@@ -11,11 +11,11 @@ type IntroBoxProps = { styling: ThemeStyling; };
 export default function IntroBox({styling}: IntroBoxProps) 
 {
     const {bgColor, fgColor, secondaryColor} = styling;
-    const introPost = GetPosts().find(post => post.title === "Introductie");
-    const introImage = GetImageByFilename(`intro-${styling.bgColor}.png`);
+    const introPost = GetPosts().find(post => post.title === "Introduction");
+    const introImage = GetImageByFilename(`intro-${styling.bgColor}.png`); // Beter to work with featuredImage, but i was a dumb dumb when i wrote this ':) 
 
     return (
-         <article className={`w-75 bg-${bgColor} h-50 my-auto rounded row p-5 border mx-auto border-${secondaryColor} hoverable-${bgColor} text-${fgColor}`}>
+         <article className={`w-75 bg-${bgColor} h-50 my-auto rounded row p-5 mt-5 border mx-auto border-${secondaryColor} hoverable-${bgColor} text-${fgColor}`}>
                 {
                     introPost 
                     ? 

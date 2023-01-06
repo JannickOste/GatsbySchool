@@ -7,6 +7,7 @@ export default function LayoutFooter({styling}: {styling:any})
 {
     const data = GetSiteMetadata();
     const githubLogo = GetImageByFilename("github.png")
+    return (<></>)
     return (<footer className={`mt-auto d-block bg-${styling.bgColor} text-${styling.fgColor} text-center row d-flex justify-content-between align-items-center`} style={{height: "5rem"}}>
         <div className="col-4">
             <a href="">{githubLogo ? <GatsbyImage image={githubLogo} alt={"Github logo"} style={{width: 50, filter: `invert(${styling.bgColor === "dark" ? 1 : 0})`}} /> : <>Github</>}</a>

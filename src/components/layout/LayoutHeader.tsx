@@ -4,10 +4,6 @@ import { DataAPI, DataAPIAction } from "../../DataAPI";
 import { GetRoutes } from "../../gql/GetRoutes";
 import GetSiteMetadata from "../../gql/GetSiteMetadata";
 
-const routeLabels = [
-    {path:"/", name: "Home"},
-    {path:"/product/", name: "Devices"}
-]
 export const LayoutHeader = ({styling: styles, toggleDarkMode}: {styling:any, toggleDarkMode:()=>void}) =>
 {
     const {title} = GetSiteMetadata();
@@ -15,8 +11,8 @@ export const LayoutHeader = ({styling: styles, toggleDarkMode}: {styling:any, to
     const routes: any[] = GetRoutes();
 
         return (<>
-            <header className={`w-100 bg-${styles.bgColor} text-${styles.fgColor} p-2 px-3 d-flex justify-content-between align-items-middle m-0`}>
-                <p className="m-0 h1">{title}</p>
+            <header className={`w-100 bg-${styles.bgColor} text-${styles.fgColor} p-2 px-3 d-flex justify-content-between align-items-middle m-0 `}>
+                <Link to={"/"} className="m-0 h1 text-decoration-none">{title}</Link>
                 <div className="d-flex align-items-center justify-content-between">
                     {routes.map((route:any, i:number) => {
                         return (

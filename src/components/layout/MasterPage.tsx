@@ -17,7 +17,7 @@ export type ThemeStyling = {
  * @returns React.Fragment
  */
 export const MasterPage = ({children}: {children:((styling: ThemeStyling) => JSX.Element)[]}) => {
-    const [state, setState] = React.useState<{darkMode:boolean}>({darkMode: true});
+    const [state, setState] = React.useState<{darkMode:boolean}>({darkMode: localStorage.getItem("dark") === "1"});
     const themeClasses: {[key:string]: ThemeStyling}= {
         primary: {
             bgColor: state.darkMode ? "dark" : "light",
@@ -41,6 +41,12 @@ export const MasterPage = ({children}: {children:((styling: ThemeStyling) => JSX
             secondaryColor: "secondary"
         }
     }
+
+    const onThemeSwitch = () => {
+        const newMode = !state.darkMode;
+        setState({...state, darkMode: newMode})
+        localStorage.setItem("dark", newMode  ? "1" : "0");
+    }
     
     return (
         <React.Fragment>
@@ -54,7 +60,7 @@ export const MasterPage = ({children}: {children:((styling: ThemeStyling) => JSX
                     },
                     {
                         rel: "stylesheet",
-                        href: "./main.css"
+                        href: "/main.css"
                     }
                 ]
             } 
@@ -64,7 +70,7 @@ export const MasterPage = ({children}: {children:((styling: ThemeStyling) => JSX
             }}
             />
             
-            <LayoutHeader styling={themeClasses.header} toggleDarkMode={() => setState({...state, darkMode: !state.darkMode})} />
+            <LayoutHeader styling={themeClasses.header} toggleDarkMode={onThemeSwitch} />
             <LayoutBody children={children.map((child) => child(themeClasses.primary))} styling={themeClasses.main} />
             <LayoutFooter styling={themeClasses.footer} />
         </React.Fragment>

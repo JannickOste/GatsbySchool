@@ -7,9 +7,11 @@
 
     const routeLabels = [
         {path:"/", name: "Home"},
-        {path:"/product/", name: "Devices"}
+        {path:"/products/", name: "Devices"},
+        {path:"/about/", name: "About"},
+        {path:"/contact/", name: "Contact"}
     ]
-    
+
     export const GetRoutes = (noStatusRoutes:boolean = true): RouteType[] => {
         const {pages: {nodes}} = useStaticQuery(graphql`
             query RouteQuery {
@@ -28,5 +30,5 @@
                 path:r.path,
                 text:label?label:"no-name"
             }
-        }).filter((r: RouteType) => noStatusRoutes ? !/(.*?)[0-9]+(.*?)/.test(r.path) : true);
+        }).filter((r: RouteType) => noStatusRoutes ? !/(.*?)[0-9]+(.*?)/.test(r.path) : true).sort((a: RouteType,b:RouteType) => b.text.localeCompare(a.text))
     }
