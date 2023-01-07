@@ -22,7 +22,10 @@ export const LayoutHeader = ({styling: styles, toggleDarkMode}: {styling:any, to
                         )
                     })}
     
-                    <button className="border-0 h5" style={{backgroundColor: "transparent"}} onClick={toggleDarkMode}>🌓</button>
+                    {/*
+                        
+                        <button className="border-0 h5" style={{backgroundColor: "transparent"}} onClick={toggleDarkMode}>🌓</button>
+                    */}
                 </div>
             </header>
         </>)

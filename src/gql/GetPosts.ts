@@ -29,8 +29,10 @@ export const GetPosts = (): PostType[] => {
     `);
 
     return nodes.map((node: any) => {
-        const {featuredImage: {node: {gatsbyImage}}} = node;
+        if(node.featuredImage === null) // Null guard clause
+            return node;
 
+        const {featuredImage: {node: {gatsbyImage}}} = node;
         return {
             ...node, 
             featuredImage:gatsbyImage
