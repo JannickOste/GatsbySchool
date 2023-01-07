@@ -18,7 +18,7 @@ export type ThemeStyling = {
  */
 export const MasterPage = ({children}: {children:((styling: ThemeStyling) => JSX.Element)[]}) => {
 
-    const [state, setState] = React.useState<{darkMode:boolean}>({darkMode: true});
+    const [state, setState] = React.useState<{darkMode:boolean}>({darkMode: true}); // Switch removed due to not having access to localstorage while using SSR (woeps)
     const themeClasses: {[key:string]: ThemeStyling}= {
         primary: {
             bgColor: state.darkMode ? "dark" : "light",
@@ -47,7 +47,6 @@ export const MasterPage = ({children}: {children:((styling: ThemeStyling) => JSX
         const newMode = !state.darkMode;
         setState({...state, darkMode: newMode})
 
-        locStorage.setItem("dark", newMode  ? "1" : "0");
     }
     
     return (
