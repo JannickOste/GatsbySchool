@@ -1,9 +1,11 @@
 import { graphql, useStaticQuery } from "gatsby"
+import { IGatsbyImageData } from "gatsby-plugin-image";
 
 export type PostType = {
     title:string;
     content:string;
     data:string;
+    featuredImage?:IGatsbyImageData;
 }
 
 export const GetPosts = (): PostType[] => {
@@ -14,10 +16,24 @@ export const GetPosts = (): PostType[] => {
                     title
                     content
                     date
+                
+                featuredImage {
+                    node {
+                    
+                    gatsbyImage(width: 800)
+                    }
+                }
                 }
             }
         }
     `);
 
-    return nodes;
+    return nodes.map((node: any) => {
+        const {featuredImage: {node: {gatsbyImage}}} = node;
+
+        return {
+            ...node, 
+            featuredImage:gatsbyImage
+        }
+    });
 }

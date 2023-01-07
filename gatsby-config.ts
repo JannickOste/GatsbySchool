@@ -4,7 +4,7 @@ import type { GatsbyConfig } from "gatsby";
 const config: GatsbyConfig = {
   siteMetadata: {
     title: `Pixels`,
-    siteUrl: `https://www.yourdomain.tld`,
+    siteUrl: `https://gatsbyschool.oste.dev`,
     github: "jannickoste"
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
@@ -15,7 +15,7 @@ const config: GatsbyConfig = {
     {
       resolve: 'gatsby-source-wordpress',
       options: {
-        "url": "http://pixels.local/graphql"
+        "url": "http://gatsbyschool.oste.dev/yeeshidothisfornothavinganobviousaccespointjnsnidsnvinsuivdndsiunisudcids"
       }
     }, 
     {

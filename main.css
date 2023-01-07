@@ -1,2 +1,5 @@
 *{ margin: 0; padding: 0}
 html, head, body, #gatsby-focus-wrapper, #___gatsby {min-height: 100vh;}
+
+.hoverable-dark:hover {filter:brightness(1.25)}
+.hoverable-light:hover {filter:brightness(.75)}
