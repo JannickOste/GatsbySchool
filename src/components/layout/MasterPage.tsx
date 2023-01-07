@@ -17,9 +17,8 @@ export type ThemeStyling = {
  * @returns React.Fragment
  */
 export const MasterPage = ({children}: {children:((styling: ThemeStyling) => JSX.Element)[]}) => {
-    const locStorage = require('localstorage-polyfill');
 
-    const [state, setState] = React.useState<{darkMode:boolean}>({darkMode: locStorage.getItem("dark") === "1"});
+    const [state, setState] = React.useState<{darkMode:boolean}>({darkMode: true});
     const themeClasses: {[key:string]: ThemeStyling}= {
         primary: {
             bgColor: state.darkMode ? "dark" : "light",
