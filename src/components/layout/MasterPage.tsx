@@ -45,6 +45,8 @@ export const MasterPage = ({children}: {children:((styling: ThemeStyling) => JSX
     const onThemeSwitch = () => {
         const newMode = !state.darkMode;
         setState({...state, darkMode: newMode})
+        let locStorage = typeof window === undefined ? require("localstorage-polyfill") : localStorage;
+        
         localStorage.setItem("dark", newMode  ? "1" : "0");
     }
     
