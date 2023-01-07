@@ -1,6 +1,5 @@
 import { graphql, HeadFC, Link, useStaticQuery } from "gatsby";
 import * as React from "react";
-import { DataAPI, DataAPIAction } from "../../DataAPI";
 import { GetRoutes } from "../../gql/GetRoutes";
 import GetSiteMetadata from "../../gql/GetSiteMetadata";
 
