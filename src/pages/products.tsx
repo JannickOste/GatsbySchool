@@ -1,10 +1,11 @@
 import { HeadFC } from "gatsby";
 import { GatsbyImage } from "gatsby-plugin-image";
 import React, { useState } from "react";
-import { DeviceOverview } from "../components/content/DeviceOverview";
-import { DeviceSelection } from "../components/content/DeviceSelection";
+import { DeviceOverview } from "../components/content/devices/DeviceOverview";
+import { DeviceSelection } from "../components/content/devices/DeviceSelection";
 import { MasterPage, ThemeStyling } from "../components/layout/MasterPage";
 import { GetDevices } from "../gql/GetDevices";
+import GetSiteMetadata from "../gql/GetSiteMetadata";
 
 type ProductsState = {
   focusedId?:number;
@@ -36,3 +37,12 @@ export default function Product()
   return (<MasterPage children={components} />)
 }
 
+
+export const Head: HeadFC = () => {
+  const {title} = GetSiteMetadata()
+  return (<>
+
+      <title>{title} - Pixel devices</title>
+  </>)
+}
+  

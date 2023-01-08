@@ -1,10 +1,20 @@
 import type { GatsbyConfig } from "gatsby";
 
+/**
+ * Rule of tumb: 
+ * -> TSX => JSX files (react)
+ * -> TS  => Vanilla ts
+ */
+
+/**
+ * Got a corrupt boot due to removing edge using powershell. 
+ * Didnt push to remote repo yet, soooo yeaaay i could start over again 2-3 days before having to deliver ':)
+ */
 
 const config: GatsbyConfig = {
   siteMetadata: {
     title: `Pixels`,
-    siteUrl: `https://www.yourdomain.tld`,
+    siteUrl: `https://gatsbyschool.oste.dev`,
     github: "jannickoste"
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
@@ -15,7 +25,7 @@ const config: GatsbyConfig = {
     {
       resolve: 'gatsby-source-wordpress',
       options: {
-        "url": "http://pixels.local/graphql"
+        "url": "http://gatsbyschool.oste.dev/yeeshidothisfornothavinganobviousaccespointjnsnidsnvinsuivdndsiunisudcids"
       }
     }, 
     {

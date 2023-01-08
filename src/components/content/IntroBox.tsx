@@ -12,7 +12,6 @@ export default function IntroBox({styling}: IntroBoxProps)
 {
     const {bgColor, fgColor, secondaryColor} = styling;
     const introPost = GetPosts().find(post => post.title === "Introduction");
-    const introImage = GetImageByFilename(`intro-${styling.bgColor}.png`); // Beter to work with featuredImage, but i was a dumb dumb when i wrote this ':) 
 
     return (
          <article className={`w-75 bg-${bgColor} h-50 my-auto rounded row p-5 mt-5 border mx-auto border-${secondaryColor} hoverable-${bgColor} text-${fgColor}`}>
@@ -21,9 +20,9 @@ export default function IntroBox({styling}: IntroBoxProps)
                     ? 
                         <> {/* Intro post text -> fetched */}
                             {/* Left column*/}
-                            <div className="col-md-6 d-none d-lg-block d-flex flex-column justify-content-center align-items-center">
-                                {introImage ? <GatsbyImage
-                                    image={introImage} alt={"A picture of a second generation pixel phone in dark or white based on the theme."}         
+                            <div className="col-md-6 d-none d-lg-flex flex-column justify-content-center align-items-center">
+                                {introPost.featuredImage ? <GatsbyImage
+                                    image={introPost.featuredImage} alt={"A picture of a second generation pixel phone in dark or white based on the theme."}         
                                     className={`w-50 d-block mx-auto align-self-center`}               
                                  /> : <>Failed to load image...</>}
                                 {/*<img src={introImage?.images.fallback.src as string} className="w-50 d-block mx-auto" alt="A picture of a second generation pixel phone."/>*/}
@@ -33,8 +32,9 @@ export default function IntroBox({styling}: IntroBoxProps)
                             <div className="col-sm-12 col-lg-6 d-flex flex-column justify-content-center">
                                 <h1>{introPost.title}</h1>
                                 <p dangerouslySetInnerHTML={{__html: introPost.content}} />
-                                <Link to="/products/" className="text-decoration-none"><button className={`btn btn-${fgColor} mx-auto d-block`}>Ga naar de device overview</button></Link>
                             </div>
+                            <Link to="/products/" className="text-decoration-none"><button className={`btn btn-${fgColor} mx-auto d-block w-50`}>Ga naar de device overview</button></Link>
+                            
                         </>
                     : <> {/* Intro post text -> failed to load */}
 

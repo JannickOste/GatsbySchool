@@ -17,7 +17,8 @@ export type ThemeStyling = {
  * @returns React.Fragment
  */
 export const MasterPage = ({children}: {children:((styling: ThemeStyling) => JSX.Element)[]}) => {
-    const [state, setState] = React.useState<{darkMode:boolean}>({darkMode: localStorage.getItem("dark") === "1"});
+
+    const [state, setState] = React.useState<{darkMode:boolean}>({darkMode: true}); // Switch removed due to not having access to localstorage while using SSR (woeps)
     const themeClasses: {[key:string]: ThemeStyling}= {
         primary: {
             bgColor: state.darkMode ? "dark" : "light",
@@ -45,7 +46,7 @@ export const MasterPage = ({children}: {children:((styling: ThemeStyling) => JSX
     const onThemeSwitch = () => {
         const newMode = !state.darkMode;
         setState({...state, darkMode: newMode})
-        localStorage.setItem("dark", newMode  ? "1" : "0");
+
     }
     
     return (
@@ -76,12 +77,3 @@ export const MasterPage = ({children}: {children:((styling: ThemeStyling) => JSX
         </React.Fragment>
     )
 }
-
-export const Head: HeadFC = () => {
-
-    return (<>
-
-        <title> Page</title>
-    </>)
-  }
-  

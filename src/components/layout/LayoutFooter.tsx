@@ -5,14 +5,22 @@ import GetSiteMetadata from "../../gql/GetSiteMetadata";
 
 export default function LayoutFooter({styling}: {styling:any}) 
 {
+    const {fgColor, bgColor} = styling;
+
     const data = GetSiteMetadata();
     const githubLogo = GetImageByFilename("github.png")
-    return (<></>)
-    return (<footer className={`mt-auto d-block bg-${styling.bgColor} text-${styling.fgColor} text-center row d-flex justify-content-between align-items-center`} style={{height: "5rem"}}>
-        <div className="col-4">
-            <a href="">{githubLogo ? <GatsbyImage image={githubLogo} alt={"Github logo"} style={{width: 50, filter: `invert(${styling.bgColor === "dark" ? 1 : 0})`}} /> : <>Github</>}</a>
+
+    const footerClasses = "d-flex justify-content-center align-items-center";
+    return (<footer className={`bg-${bgColor} text-${fgColor} text-decoration-none d-flex mt-5`} style={{height: "5rem"}}>
+        
+        <div style={{flex: 1}} className={footerClasses}>
+            <a href="https://github.com/JannickOste">{githubLogo ? <GatsbyImage image={githubLogo} alt={"Github logo"} style={{width: 50, filter: `invert(${styling.bgColor === "dark" ? 1 : 0})`}} /> : <>Github</>}</a>
         </div>
-        <div className="col-4">Derp</div>
-        <div className="col-4">&copy;{new Date(Date.now()).getFullYear()} - Oste Jannick</div>
+        <div style={{flex: 1}} className={footerClasses}>&copy;{new Date(Date.now()).getFullYear()} - Oste Jannick</div>
+        
+        <div style={{flex: 1}} className={footerClasses}>
+            0016 Amphitheatre Pkways,<br />
+            Mountain Views, CA 430945,<br/> Verenigde Staten
+        </div>
     </footer>)
 }   
