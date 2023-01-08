@@ -10,7 +10,7 @@ export const LayoutHeader = ({styling: styles, toggleDarkMode}: {styling:any, to
     const routes: any[] = GetRoutes();
 
         return (<>
-            <header className={`w-100 bg-${styles.bgColor} text-${styles.fgColor} p-2 px-3 d-flex justify-content-between align-items-middle m-0 `}>
+            <header className={`w-100 bg-${styles.bgColor} text-${styles.fgColor} p-2 px-3 d-flex justify-content-between align-items-middle m-0 flex-shrink-0 `}>
                 <Link to={"/"} className="m-0 h1 text-decoration-none">{title}</Link>
                 <div className="d-flex align-items-center justify-content-between">
                     {routes.map((route:any, i:number) => {

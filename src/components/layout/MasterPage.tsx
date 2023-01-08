@@ -67,13 +67,15 @@ export const MasterPage = ({children}: {children:((styling: ThemeStyling) => JSX
             } 
             
             bodyAttributes={{
-                class: `d-flex flex-column bg-${themeClasses.primary.secondaryColor}`
+                class: `d-flex flex-column min-vh-100 bg-${themeClasses.primary.secondaryColor}`
             }}
             />
-            
-            <LayoutHeader styling={themeClasses.header} toggleDarkMode={onThemeSwitch} />
-            <LayoutBody children={children.map((child) => child(themeClasses.primary))} styling={themeClasses.main} />
-            <LayoutFooter styling={themeClasses.footer} />
+            <div className="min-vh-100 position-relative">
+
+                <LayoutHeader styling={themeClasses.header} toggleDarkMode={onThemeSwitch} />
+                <LayoutBody children={children.map((child) => child(themeClasses.primary))} styling={themeClasses.main} />
+                <LayoutFooter styling={themeClasses.footer} />
+            </div>
         </React.Fragment>
     )
 }
