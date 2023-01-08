@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { ThemeStyling } from "../layout/MasterPage";
+import { ThemeStyling } from "../../layout/MasterPage";
 
 type ContactFormMessage = {
     firstName:string;
@@ -10,7 +10,7 @@ type ContactFormMessage = {
 }
 
 type ContactFormState = ContactFormMessage & {
-    error?:string|undefined;
+    info?:string|undefined;
 }
 
 export const ContactForm = ({styling}:{styling:ThemeStyling}) => {
@@ -24,22 +24,30 @@ export const ContactForm = ({styling}:{styling:ThemeStyling}) => {
         const myForm = event.target;
         const formData = new FormData(myForm);
         
-        fetch("/contact/", {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: new URLSearchParams(formData as any).toString(),
-        })
-          .then(() => console.log("Form successfully submitted"))
-          .catch((error) => alert(error));
-      };
-      
+        (async() => {
+            try
+            {
+                await fetch("/contact/", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                    body: new URLSearchParams(formData as any).toString(),
+                  });
+                  
+                setState({...state, info: "Message send!"})
+            } 
+            catch(err)
+            {
+                setState({...state, info: (err as Error).message})
+            }
+        })();
+    }
       
 
-    return (<article className={`text-${fgColor} bg-${bgColor} rounded p-5 w-100 mt-5`}>
-        <strong className="h1 fw-bold">Contact us:</strong>
+    return (<article className={`text-${fgColor} bg-${bgColor} rounded p-5 w-100 my-5`}>
+        <strong className="h1 fw-bold">Leave a message:</strong>
 
-        {state.error ? (<div className={`bg-${fgColor} p-2 text-${bgColor} mb-5 rounded`}>{state.error}</div>) : (<hr className="my-5" />)}
-        
+        {state.info ? (<div className={`bg-${fgColor} mt-5 p-2 text-${bgColor} mb-5 rounded`}>{state.info}</div>) : (<hr className="my-5" />)}
+
         <form action="POST" name="contact" onSubmit={(ev) => {ev.preventDefault(); handleSubmit(ev);}} className={`d-flex flex-column`} data-netlify={true}>
             {["firstName", "lastName", "email", "subject"].map((v, i) => {
                 const sanitizedName = (v[0].toUpperCase()+v.slice(1)).replace(/(?!^)(?=[A-Z])/, " ");

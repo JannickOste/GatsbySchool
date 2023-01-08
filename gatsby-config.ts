@@ -1,5 +1,16 @@
 import type { GatsbyConfig } from "gatsby";
 
+/**
+ * Rule of tumb: 
+ * -> TSX => JSX files (react)
+ * -> TS  => Vanilla ts
+ */
+
+/**
+ * Got a corrupt boot due to removing edge using powershell. 
+ * Didnt push to remote repo yet, soooo yeaaay i could start over again 2-3 days before having to deliver ':)
+ */
+
 const config: GatsbyConfig = {
   siteMetadata: {
     title: `Pixels`,

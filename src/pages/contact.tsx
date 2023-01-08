@@ -1,28 +1,36 @@
 import * as React from "react"
-import { PageProps} from "gatsby"
+import { graphql, HeadFC, PageProps, useStaticQuery} from "gatsby"
 import { MasterPage } from "../components/layout/MasterPage"
 import IntroBox from "../components/content/IntroBox"
-import { ContactForm } from "../components/content/ContactForm"
+import { ContactForm } from "../components/content/contact/ContactForm"
 import { GetPosts } from "../gql/GetPosts"
 import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image"
+import GetSiteMetadata from "../gql/GetSiteMetadata"
+import { ContactIntro } from "../components/content/contact/ContactIntro"
+import GetContactPageFields, { ContactUsFields } from "../gql/pages/GetContactPageFields"
 
 const ContactPage: React.FC<PageProps> = () => (<MasterPage children={[
     (styling) => {
+        const fields:ContactUsFields = GetContactPageFields();
+        
         const introduction = GetPosts().find(obj => obj.title === "Contact-introduction");
         const {bgColor, fgColor} = styling;
 
         return(<section className="d-flex flex-column w-75 mx-auto justify-content-around">
-            <div className={`bg-${bgColor} text-${fgColor} rounded p-5 mt-5 row d-flex justify-content-between`}>
-                <div className="col-xl-4 d-xl-flex d-none">
-                    <GatsbyImage image={introduction?.featuredImage as IGatsbyImageData} alt={"Designer"} className={`d-block mx-auto w-50 align-self-center d-flex`} />
-                </div>  
-                <div className="col-xl-8 col-12">
-                    {introduction !== undefined ? (<p dangerouslySetInnerHTML={{__html:introduction.content}} />) : <p>Failed to load introduction text...</p>} 
-                </div>
-            </div>
+            <ContactIntro styling={styling} fields={fields} />
+
             <ContactForm styling={styling} />
         </section>)
     }
 ]} />)
 
 export default ContactPage;
+
+export const Head: HeadFC = () => {
+    const {title} = GetSiteMetadata()
+    return (<>
+
+        <title>{title} - Contact us</title>
+    </>)
+  }
+    

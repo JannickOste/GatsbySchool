@@ -1,7 +1,7 @@
 import { GatsbyImage } from "gatsby-plugin-image";
 import React from "react";
-import { DeviceType } from "../../gql/GetDevices";
-import { ThemeStyling } from "../layout/MasterPage";
+import { DeviceType } from "../../../gql/GetDevices";
+import { ThemeStyling } from "../../layout/MasterPage";
 
 export type DeviceOverviewProps = {
     styling:ThemeStyling;

@@ -1,48 +1,54 @@
 import * as React from "react"
-import { PageProps} from "gatsby"
+import { HeadFC, PageProps} from "gatsby"
 import { MasterPage } from "../components/layout/MasterPage"
 import { GetPosts } from "../gql/GetPosts"
-import { GatsbyImage, StaticImage } from "gatsby-plugin-image"
+import { GatsbyImage, getImage, StaticImage } from "gatsby-plugin-image"
+import GetSiteMetadata from "../gql/GetSiteMetadata"
+import GetAboutPageFields, { AboutUsFields } from "../gql/pages/GetAboutPageFields"
 
 const AboutPage: React.FC<PageProps> = () => (<MasterPage children={[
     (style) => {
-        const posts = GetPosts();
-        const [aboutPost, missionPost] = [posts.find(post => post.title === "About-us"), posts.find(post => post.title === "Mission")];
         const {fgColor, bgColor} = style;
 
-        const getHeading = (title:string) => `<h1>${title}</h1><hr />`
 
+        const {goaldescription, goalpicture, goaltitle, missiondescription, missionpicture, missiontitle}:AboutUsFields = GetAboutPageFields();
+        
+
+        const rows = [
+            {title:goaltitle, description:goaldescription, picture:goalpicture.localFile},
+            {title:missiontitle, description:missiondescription, picture:missionpicture.localFile}
+        ]
+        
 
         return (<section className="w-75 d-flex flex-column mx-auto">
-                <article className={`row bg-${bgColor} text-${fgColor} p-4 rounded my-5`}>
-                    {aboutPost 
-                    ? <>
-                        <div className="col-8" dangerouslySetInnerHTML={{__html: getHeading(aboutPost?.title.replace("-", " "))+aboutPost.content}} style={{textAlign: "justify"}}></div>
-                        <div className="col-4 d-flex justify-content-end">
-                            {aboutPost.featuredImage ? <GatsbyImage image={aboutPost.featuredImage} alt={"Company owner"} /> : <p>Failed to load about us image</p>}
-                        </div>
-                    </>
-                    : <>
-                        Failed to load about us data...
-                    </>}
-                </article>
+                {rows.map((v, i) => {
+                    const reverse = i % 2 !== 0;
+                    const parsedImage = getImage(v.picture);
 
-                <article className={`row bg-${bgColor} text-${fgColor} p-4 rounded my-5`}>
-                    {missionPost 
-                    ? <>
-                        <div className="col-4 d-flex justify-content-end">
-                            
-                            {missionPost.featuredImage ? <GatsbyImage image={missionPost.featuredImage} alt={"Random company face"} style={{borderRadius: "50%"}} /> : <p>Failed to load about us image</p>}
+                    return (<article key={i} className={`row bg-${bgColor} text-${fgColor} p-4 rounded my-5 d-flex ${reverse ? "flex-row-reverse" : ""}`}>
+               
+                        <div className="col-8" style={{textAlign: "justify"}}>
+                            <p className={`h1 ${reverse ? "text-end" : ""}`}>{v.title}</p>
+                            <hr />
+                            <p>{v.description}</p>
                         </div>
-                        <div className="col-8" dangerouslySetInnerHTML={{__html:getHeading(missionPost?.title.replace("-", " "))+missionPost.content}}  />
-                            
-                    </>
-                    : <>
-                        Failed to load mission data...
-                    </>}
-                </article>
+
+                        <div className={`col-4 d-flex ${!reverse ? "justify-content-end" : ""}`}>
+                            {parsedImage ? <GatsbyImage image={parsedImage} alt={(v.picture.altText ? v.picture.altText : "alternative text not found")} className={`w-100 rounded`}/> : <p>Failed to load about us image</p>}
+                        </div>
+                </article>)
+                })}
             </section>
         )}
 ]} />)
 
 export default AboutPage;
+
+export const Head: HeadFC = () => {
+    const {title} = GetSiteMetadata()
+    return (<>
+
+        <title>{title} - About us</title>
+    </>)
+  }
+    

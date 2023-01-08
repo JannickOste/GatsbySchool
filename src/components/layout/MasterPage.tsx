@@ -77,12 +77,3 @@ export const MasterPage = ({children}: {children:((styling: ThemeStyling) => JSX
         </React.Fragment>
     )
 }
-
-export const Head: HeadFC = () => {
-
-    return (<>
-
-        <title> Page</title>
-    </>)
-  }
-  
