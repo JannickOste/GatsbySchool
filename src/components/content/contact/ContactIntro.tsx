@@ -14,7 +14,7 @@ export const ContactIntro = ({styling, fields}: ContactIntroProps) => {
     const imageData: IGatsbyImageData | undefined = getImage(picture.localFile);
 
     return (<article className={`bg-${bgColor} row text-${fgColor} p-5 rounded mt-5`}>
-        <div className="col-6">
+        <div className="col-xl-6 col-12">
             <h1 className={`h1`}>{title}</h1>
             {description}
             <hr />
@@ -26,7 +26,7 @@ export const ContactIntro = ({styling, fields}: ContactIntroProps) => {
                 {city} {zipcode}
             </div>
         </div>
-        <div className="col-6 d-flex justify-content-center align-items-middle">
+        <div className="col-xl-6 d-none d-xl-flex justify-content-center align-items-middle">
             {imageData ? <GatsbyImage image={imageData} alt={""} style={{borderRadius: "50%"}}  /> : <>Failed to load contact introduction image</>}
         </div>
     </article>)

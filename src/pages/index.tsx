@@ -1,7 +1,7 @@
 import * as React from "react"
 import { HeadFC, PageProps} from "gatsby"
 import { MasterPage } from "../components/layout/MasterPage"
-import IntroBox from "../components/content/IntroBox"
+import IntroBox from "../components/content/home/IntroBox"
 import GetSiteMetadata from "../gql/GetSiteMetadata"
 
 const IndexPage: React.FC<PageProps> = () => (<MasterPage children={[

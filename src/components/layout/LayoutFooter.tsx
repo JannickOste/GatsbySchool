@@ -11,8 +11,8 @@ export default function LayoutFooter({styling}: {styling:any})
     const githubLogo = GetImageByFilename("github.png")
 
     const footerClasses = "d-flex justify-content-center align-items-center";
-    return (<footer className={`bg-${bgColor} text-${fgColor} text-decoration-none w-100 position-absolute`} style={{height: "5rem", bottom: 0}}>
-        <div className="d-flex ">
+    return (<footer className={`bg-${bgColor} text-${fgColor} text-decoration-none w-100 position-absolute mt-5`} style={{height: "10rem", bottom: " "}}>
+        <div className="d-flex" style={{height: "100%"}}>
 
             <div style={{flex: 1}} className={footerClasses}>
                 <a href="https://github.com/JannickOste">{githubLogo ? <GatsbyImage image={githubLogo} alt={"Github logo"} style={{width: 50, filter: `invert(${styling.bgColor === "dark" ? 1 : 0})`}} /> : <>Github</>}</a>

@@ -1,7 +1,7 @@
 import * as React from "react"
 import { graphql, HeadFC, PageProps, useStaticQuery} from "gatsby"
 import { MasterPage } from "../components/layout/MasterPage"
-import IntroBox from "../components/content/IntroBox"
+import IntroBox from "../components/content/home/IntroBox"
 import { ContactForm } from "../components/content/contact/ContactForm"
 import { GetPosts } from "../gql/GetPosts"
 import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image"
@@ -16,7 +16,7 @@ const ContactPage: React.FC<PageProps> = () => (<MasterPage children={[
         const introduction = GetPosts().find(obj => obj.title === "Contact-introduction");
         const {bgColor, fgColor} = styling;
 
-        return(<section className="d-flex flex-column w-75 mx-auto justify-content-around">
+        return(<section>
             <ContactIntro styling={styling} fields={fields} />
 
             <ContactForm styling={styling} />

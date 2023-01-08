@@ -10,7 +10,7 @@ export type DeviceOverviewProps = {
 
 export const DeviceOverview = ({phone, styling}: DeviceOverviewProps) => {
     const {bgColor, fgColor} = styling;
-    return (phone ? (<div className={` bg-${bgColor} row w-75 mx-auto d-flex justify-content-between p-5`}>
+    return (phone ? (<article className={` bg-${bgColor} row d-flex justify-content-between p-5`}>
             
             <div className="col-xl-8 col-12">
               <p className={`text-${fgColor} h2`}>{phone.title}</p>
@@ -30,5 +30,5 @@ export const DeviceOverview = ({phone, styling}: DeviceOverviewProps) => {
               </div>
             </div>
 
-          </div>) : <>Failed to fetch device data</>)
+          </article>) : <>Failed to fetch device data</>)
 }

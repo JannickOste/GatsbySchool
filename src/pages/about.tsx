@@ -5,6 +5,7 @@ import { GetPosts } from "../gql/GetPosts"
 import { GatsbyImage, getImage, StaticImage } from "gatsby-plugin-image"
 import GetSiteMetadata from "../gql/GetSiteMetadata"
 import GetAboutPageFields, { AboutUsFields } from "../gql/pages/GetAboutPageFields"
+import { ContentBox } from "../components/content/ContentBox"
 
 const AboutPage: React.FC<PageProps> = () => (<MasterPage children={[
     (style) => {
@@ -20,23 +21,22 @@ const AboutPage: React.FC<PageProps> = () => (<MasterPage children={[
         ]
         
 
-        return (<section className="w-75 d-flex flex-column mx-auto">
+        return (<section className="d-flex flex-column mx-auto">
                 {rows.map((v, i) => {
                     const reverse = i % 2 !== 0;
                     const parsedImage = getImage(v.picture);
 
-                    return (<article key={i} className={`row bg-${bgColor} text-${fgColor} p-4 rounded my-5 d-flex ${reverse ? "flex-row-reverse" : ""}`}>
-               
-                        <div className="col-8" style={{textAlign: "justify"}}>
+                    return (<ContentBox key={i} styling={style} className={`row p-5 rounded my-5 d-flex ${reverse ? "flex-row-reverse" : ""}`} children={<>
+                        <div className="col-xl-8 col-12" style={{textAlign: "justify"}}>
                             <p className={`h1 ${reverse ? "text-end" : ""}`}>{v.title}</p>
                             <hr />
                             <p>{v.description}</p>
                         </div>
 
-                        <div className={`col-4 d-flex ${!reverse ? "justify-content-end" : ""}`}>
+                        <div className={`col-xl-4 d-xl-flex d-none ${!reverse ? "justify-content-end" : ""}`}>
                             {parsedImage ? <GatsbyImage image={parsedImage} alt={(v.picture.altText ? v.picture.altText : "alternative text not found")} className={`w-100 rounded`}/> : <p>Failed to load about us image</p>}
                         </div>
-                </article>)
+                    </>} />)
                 })}
             </section>
         )}
