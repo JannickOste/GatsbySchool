@@ -12,8 +12,9 @@ export type ThemeStyling = {
 }
 
 /**
- * Layout component aka MasterPage => https://guides.lib.umich.edu/c.php?g=282834&p=1884599
- * @param children Callable child component creator, (uses callbacks to )
+ * MasterPage aka layout component
+ * @param children Callable child component creator, (uses callbacks to allow for default middleware between master render and component)
+ * 
  * @returns React.Fragment
  */
 export const MasterPage = ({children}: {children:((styling: ThemeStyling) => JSX.Element)[]}) => {
@@ -58,10 +59,6 @@ export const MasterPage = ({children}: {children:((styling: ThemeStyling) => JSX
                         href: "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css",
                         integrity: "sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD",
                         crossOrigin: "anonymous"
-                    },
-                    {
-                        rel: "stylesheet",
-                        href: "/main.css"
                     }
                 ]
             } 
